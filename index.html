@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to HTML Converter</title>
+    <!-- Include marked.js library from a CDN for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        textarea,
+        .output-preview {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 500px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        textarea {
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+            background-color: #fff;
+        }
+        .output-preview {
+            background-color: #e9ecef;
+            overflow-y: auto;
+            /* Basic styling for rendered Markdown elements */
+            h1, h2, h3 {
+                color: #2c3e50;
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 5px;
+                margin-top: 20px;
+            }
+            p {
+                margin-bottom: 1em;
+                text-align: left;
+            }
+            ul, ol {
+                margin-left: 25px;
+                margin-bottom: 1em;
+            }
+            strong {
+                font-weight: bold;
+            }
+            em {
+                font-style: italic;
+            }
+            code {
+                background-color: #eee;
+                padding: 2px 4px;
+                border-radius: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Markdown to HTML Converter</h1>
+    <p>Type Markdown on the left, and see the rendered HTML on the right. This demonstrates how applications like Bear Blog process and display content written using simple Markdown syntax.</p>
+    <div class="container">
+        <textarea id="markdownInput" placeholder="Enter your Markdown here...">
+# Bear Blog İçin Markdown
+
+Bu, Bear Blog'unuz için Markdown'ın temel gerekliliklerini gösteren bir örnektir.
+
+## Temel Biçimlendirme
+
+*   **Kalın Metin**: Metni vurgulamak için çift yıldız kullanın. Örneğin: `**bu kalın**`.
+*   _İtalik Metin_: Metni eğik yapmak için tek yıldız veya alt çizgi kullanın. Örneğin: `*bu italik*` veya `_bu italik_`.
+
+### Listeler
+
+*   Madde 1
+*   Madde 2
+    *   Alt Madde A
+    *   Alt Madde B
+
+1.  Sıralı Öğe 1
+2.  Sıralı Öğe 2
+
+Bu basit işaretlemeler, içeriğinizi karmaşık HTML etiketleriyle uğraşmadan biçimlendirmenizi sağlar. Özellikle hızlı içerik üretimi için büyük bir avantajdır.
+        </textarea>
+        <div id="outputPreview" class="output-preview"></div>
+    </div>
+
+    <script>
+        const markdownInput = document.getElementById('markdownInput');
+        const outputPreview = document.getElementById('outputPreview');
+
+        // Function to convert Markdown to HTML and update the preview
+        function updatePreview() {
+            const markdownText = markdownInput.value;
+            // The core concept: using a Markdown parser (marked.js) to convert plain text with Markdown syntax
+            // into structured HTML, similar to how Bear Blog processes user input for display.
+            outputPreview.innerHTML = marked.parse(markdownText);
+        }
+
+        // Update preview on input change
+        markdownInput.addEventListener('input', updatePreview);
+
+        // Initial update when the page loads with the default content
+        updatePreview();
+    </script>
+</body>
+</html>
